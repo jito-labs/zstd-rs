@@ -189,7 +189,7 @@ impl<'a> Decoder<'a> {
         context
             .ref_prefix(ref_prefix)
             .map_err(map_error_code)?;
-        Ok(Decoder { context })
+        Ok(Decoder { context: MaybeOwnedDCtx::Owned(context), })
     }
 
     /// Sets a decompression parameter for this decoder.
@@ -333,7 +333,7 @@ impl<'a> Encoder<'a> {
             .ref_prefix(ref_prefix)
             .map_err(map_error_code)?;
 
-        Ok(Encoder { context })
+        Ok(Encoder { context: MaybeOwnedCCtx::Owned(context), })
     }
 
     /// Sets a compression parameter for this encoder.
